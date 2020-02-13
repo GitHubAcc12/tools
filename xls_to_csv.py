@@ -19,7 +19,12 @@ if __name__=='__main__':
     for file in os.listdir(i_directory):
         filename = os.fsdecode(file)
         if filename.endswith(".xls") or filename.endswith(".xlsx"): 
-            data = pd.read_excel(args['input']+'/'+filename, index_col=0)
-            with open(args['output']+'/'+filename[:-filename.find('.xls')+1] + '.csv', 'w') as csvfile:
-                data.to_csv(csvfile)
+            try:
+                data = pd.read_excel(args['input']+'/'+filename, index_col=0)
+                with open(args['output']+'/'+filename[:-filename.find('.xls')+1] + '.csv', 'w') as csvfile:
+                    data.to_csv(csvfile)
+            except KeyboardInterrupt:
+                raise
+            except:
+                print(f'File {filename} failed to convert, skipping')
         
