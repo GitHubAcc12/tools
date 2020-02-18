@@ -7,12 +7,12 @@ if __name__=='__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('-i', '--input', default='.',
                     required=False, help='path to folder with excel files')
-    ap.add_argument('-o', '--output', default='./csv', required=False, help='where to save the csv files')
+    ap.add_argument('-o', '--output', default='/csv', required=False, help='where to save the csv files')
     args = vars(ap.parse_args())
 
     i_directory = os.fsencode(args['input'])
 
-    o_directory = os.fsencode(args['output'])
+    o_directory = os.fsencode(args['input']+args['output'])
     Path(args['output']).mkdir(exist_ok=True)
 
 
